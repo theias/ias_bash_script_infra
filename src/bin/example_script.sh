@@ -5,18 +5,21 @@
 #################################
 # Include this for Bash goodness
 
-SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -L )"
 
-PATH="$SCRIPT_PATH":$PATH
-
+# NOTE: This runs against the INSTALLED version of FindBin...
+. /opt/IAS/lib/bash4/IAS/BashInfra/FindBin.sh
+export PATH="${BASH_FINDBIN_REALBIN}:${PATH}"
 . bash_lib.sh
-LOG_TO_FILE='1'
-. bash_log_dispatcher.sh
 
 if [[ ! -d $BIN_DIR ]]; then
 	echo "I was unable to find BIN_DIR : $BIN_DIR .  Please check bash_lib.sh"
 	exit 1
 fi
+
+LOG_TO_FILE='1'
+. bash_log_dispatcher.sh
+
+
 
 #################################
 
