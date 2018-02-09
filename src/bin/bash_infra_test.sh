@@ -11,7 +11,9 @@
 LOG_TO_FILE='1'
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -L )"
-. $SCRIPT_PATH/../lib/bash4/IAS/BashInfra/full_project_lib.sh
+IAS_BASH_INFRA_LIB_DIR="${SCRIPT_PATH}/../lib/bash4/IAS/BashInfra/"
+
+. $IAS_BASH_INFRA_LIB_DIR/full_project_lib.sh
 
 
 if [[ ! -d $BIN_DIR ]]; then
@@ -27,7 +29,7 @@ write_log_start
 
 output_file_name=`get_output_file_name`
 
-debug_variables
+debug_project_variables
 echo "Here is the configuration file example_config.conf:"
 cat $CONF_DIR/example_config.conf
 
