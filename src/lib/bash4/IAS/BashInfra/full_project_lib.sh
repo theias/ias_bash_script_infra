@@ -7,6 +7,7 @@ if [[ -z "$IAS_BASH_INFRA_LIB_DIR" ]]; then
 fi
 
 . $IAS_BASH_INFRA_LIB_DIR/FindBin.sh
+. $IAS_BASH_INFRA_LIB_DIR/project_path_chooser.sh
 . $IAS_BASH_INFRA_LIB_DIR/project_standard_functions.sh
 . $IAS_BASH_INFRA_LIB_DIR/full_project_variables.sh
 . $IAS_BASH_INFRA_LIB_DIR/full_project_load_environment.sh

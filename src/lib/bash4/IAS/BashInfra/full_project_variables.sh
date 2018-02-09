@@ -16,21 +16,26 @@ function debug_project_variables
 	echo "Script extension: "$SCRIPT_EXTENSION
 }
 
-SCRIPT_PATH="$0"
-SCRIPT_ARGS="$@"
+function debug_project_paths
+{
+	debug_project_variables
+}
 
+SCRIPT_PATH="$0"
 if [[ "$SCRIPT_PATH" == "-bash" ]]; then
 	export SCRIPT_PATH=`echo "${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}"`
 fi
+
+SCRIPT_ARGS="$@"
 
 # echo "SCRIPT_PATH: " $SCRIPT_PATH
 
 BIN_DIR="$BIN_DIR"
 if [[ -z "$BIN_DIR" ]]; then
-	if [[ -z "$BASH_FINDBIN_REALBIN" ]]; then
+	if [ -z ${BASH_FINDBIN_REALBIN+x} ]]; then
 		BIN_DIR="$( cd "$(dirname -- "$SCRIPT_PATH")" ; pwd )"
 	else
-		BIN_DIR="$BASH_FINDBIN_REALBIN"
+		BIN_DIR="${PROJECT_BIN_DIR}"
 	fi
 fi
 

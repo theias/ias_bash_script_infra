@@ -2,7 +2,12 @@
 
 BASH_FINDBIN_MAXSYMLINKS=50
 BASH_FINDBIN_SCRIPT="$0"
-BASH_FINDBIN_BIN="$( cd "$(dirname "$0")" ; pwd )"
+
+if [[ "$BASH_FINDBIN_SCRIPT" == "-bash" ]]; then
+	 BASH_FINDBIN_SCRIPT=`echo "${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}"`
+fi
+
+BASH_FINDBIN_BIN="$( cd "$(dirname "$BASH_FINDBIN_SCRIPT")" ; pwd )"
 
 BASH_FINDBIN_REALPATH="/usr/bin/realpath"
 
