@@ -7,14 +7,11 @@
 
 
 # NOTE: This runs against the SOURCE TREE version of FindBin...
-
 LOG_TO_FILE='1'
-
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -L )"
 IAS_BASH_INFRA_LIB_DIR="${SCRIPT_PATH}/../lib/bash4/IAS/BashInfra/"
 
 . $IAS_BASH_INFRA_LIB_DIR/full_project_lib.sh
-
 
 if [[ ! -d $BIN_DIR ]]; then
 	echo "I was unable to find BIN_DIR : $BIN_DIR .  Please check bash_lib.sh"
