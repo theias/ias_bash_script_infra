@@ -7,9 +7,11 @@
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -L )"
 
-. $SCRIPT_PATH/syslog_lib.sh
+PATH="$SCRIPT_PATH":$PATH
 
-. $SCRIPT_PATH/bash_lib.sh
+. bash_lib.sh
+LOG_TO_FILE='1'
+. bash_log_dispatcher.sh
 
 if [[ ! -d $BIN_DIR ]]; then
 	echo "I was unable to find BIN_DIR : $BIN_DIR .  Please check bash_lib.sh"

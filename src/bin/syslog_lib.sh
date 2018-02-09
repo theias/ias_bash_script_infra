@@ -18,11 +18,11 @@
 #	Please see man syslog for more information.
 # LOG_TO_STDERR - log messages to STDERR
 
-export LOG_DEBUG=0
-export LOGGER_SYSLOG_FACILITY="local3"
-export LOG_TO_STDERR=0
+LOG_DEBUG=0
+LOGGER_SYSLOG_FACILITY="local3"
+LOG_TO_STDERR=0
 
-export LOGGER=/usr/bin/logger
+LOGGER=/usr/bin/logger
 
 # Everything after this point is used for development purposes
 
