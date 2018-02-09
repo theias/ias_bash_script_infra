@@ -6,9 +6,13 @@
 # Include this for Bash goodness
 
 
-# NOTE: This runs against the INSTALLED version of FindBin...
+# NOTE: This runs against the SOURCE TREE version of FindBin...
+
 LOG_TO_FILE='1'
-. /opt/IAS/lib/bash4/IAS/BashInfra/full_project_lib.sh
+
+SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -L )"
+. $SCRIPT_PATH/../lib/bash4/IAS/BashInfra/full_project_lib.sh
+
 
 if [[ ! -d $BIN_DIR ]]; then
 	echo "I was unable to find BIN_DIR : $BIN_DIR .  Please check bash_lib.sh"
