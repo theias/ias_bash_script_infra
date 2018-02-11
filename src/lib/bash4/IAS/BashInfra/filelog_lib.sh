@@ -16,8 +16,8 @@ fi
 
 function check_logging_setup
 {
-	if [[ ! -d `basename ${LOG_FILE_PATH}` ]]; then
-		>&2 echo "WARNING: basename of ${LOG_FILE_PATH} does not exist!"
+	if [[ ! -d `dirname ${LOG_FILE_PATH}` ]]; then
+		>&2 echo "WARNING: dirname of ${LOG_FILE_PATH} does not exist!"
 	fi
 }
 

@@ -1,6 +1,3 @@
-echo "bin: $BASH_FINDBIN_BIN"
-echo "Realbin: $BASH_FINDBIN_REALBIN"
-
 function set_project_chosen_bin
 {
 	local wanted
