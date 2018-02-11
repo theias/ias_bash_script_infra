@@ -46,6 +46,11 @@ LOGGER=/usr/bin/logger
 # local6
 # local7
 
+function check_logging_setup
+{
+
+}
+
 function write_logger_syslog_message
 {
 	local log_priority

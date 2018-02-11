@@ -18,3 +18,5 @@ fi
 . $IAS_BASH_INFRA_LIB_DIR/full_project_load_environment.sh
 . $IAS_BASH_INFRA_LIB_DIR/bash_log_dispatcher.sh
 
+
+check_logging_setup

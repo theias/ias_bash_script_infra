@@ -14,6 +14,13 @@ fi
 
 # echo "SCRIPT_PATH: " $SCRIPT_PATH
 
+function check_logging_setup
+{
+	if [[ ! -d `basename ${LOG_FILE_PATH}` ]]; then
+		>&2 echo "WARNING: basename of ${LOG_FILE_PATH} does not exist!"
+	fi
+}
+
 function write_logfile_message
 {
 	local log_priority
