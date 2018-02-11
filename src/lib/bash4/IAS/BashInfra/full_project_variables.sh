@@ -23,7 +23,7 @@ function debug_project_paths
 
 SCRIPT_PATH="$0"
 if [[ "$SCRIPT_PATH" == "-bash" ]]; then
-	export SCRIPT_PATH=`echo "${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}"`
+	SCRIPT_PATH=`echo "${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}"`
 fi
 
 SCRIPT_ARGS="$@"

@@ -73,16 +73,10 @@ function get_log_dir
 
 function get_lib_dir
 {
+	echo `get_full_project_generic_dir lib`	
+}
 
-	local some_bin_dir
-	some_bin_dir=`get_project_whence`
-
-	if project_is_bin_dir_in_src $some_bin_dir ; then
-		echo "${some_bin_dir}/../lib"
-		return
-	else
-		echo "${LIB_INST_DIR}"
-		return
-	fi
-	
+function get_template_dir
+{
+	echo `get_full_project_generic_dir templates`
 }
