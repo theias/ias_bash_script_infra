@@ -62,4 +62,13 @@ fi
 
 BASH_FINDBIN_REALBIN="$( cd "$(dirname "$BASH_FINDBIN_REALSCRIPT")" ; pwd )"
 
+function bash_findbin_is_bin_a_symlink
+{
+	if [[ "$BASH_FINDBIN_SCRIPT" != "$BASH_FINDBIN_REALSCRIPT" ]]; then
+		return 0
+	fi
+	return 1
+}
+
+
 

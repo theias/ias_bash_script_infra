@@ -23,6 +23,15 @@ function get_project_whence
 	echo "$PROJECT_BIN_DIR"
 }
 
+LIB_INST_DIR="$LIB_INST_DIR"
+if [[ -z "$LIB_INST_DIR" ]]; then
+	LIB_INST_DIR=/opt/IAS/lib/bash4
+fi
+
+IAS_BASH_INFRA_LIB_DIR="$IAS_BASH_INFRA_LIB_DIR"
+if [[ -z "$IAS_BASH_INFRA_LIB_DIR" ]]; then
+	IAS_BASH_INFRA_LIB_DIR="${LIB_INST_DIR}/IAS/BashInfra"
+fi
 
 PROJECT_CHOSEN_BIN="$PROJECT_CHOSEN_BIN"
 if [[ -z $PROJECT_BIN_DIR ]]; then

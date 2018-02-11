@@ -28,17 +28,6 @@ fi
 
 SCRIPT_ARGS="$@"
 
-# echo "SCRIPT_PATH: " $SCRIPT_PATH
-
-BIN_DIR="$BIN_DIR"
-if [[ -z "$BIN_DIR" ]]; then
-	if [ -z ${BASH_FINDBIN_REALBIN+x} ]]; then
-		BIN_DIR="$( cd "$(dirname -- "$SCRIPT_PATH")" ; pwd )"
-	else
-		BIN_DIR="${PROJECT_BIN_DIR}"
-	fi
-fi
-
 SCRIPT_FILE=$(basename "$SCRIPT_PATH")
 SCRIPT_EXTENSION="${SCRIPT_FILE##*.}"
 SCRIPT_NAME="${SCRIPT_FILE%.*}"
@@ -57,26 +46,4 @@ if [[ ! -z ${HOME+x} ]]; then
 fi
 
 
-if [ -d "$BIN_DIR/../../src" ]; then
-	PROJECT_DIRECTORY="$( cd "$(dirname "$BIN_DIR/../../../")" ; pwd -L )"
-	PROJECT_NAME=`basename "$PROJECT_DIRECTORY"`
-	# echo "Project directory: $PROJECT_DIRECTORY"
-	# echo "PROJECT_NAME: $PROJECT_NAME"
-	PACKAGE_NAME=`echo "$PROJECT_NAME" | sed 's/_/-/g'`
-	# echo "Package name: $PACKAGE_NAME"
-	
-	OUTPUT_DIR="$BIN_DIR"/../output
-	INPUT_DIR="$BIN_DIR"/../input
-	CONF_DIR="$BIN_DIR"/../etc
-	LOG_DIR="$BIN_DIR"/../log
-else
-	PACKAGE_NAME=`basename $BIN_DIR`
-	
-	OUTPUT_DIR="$BIN_DIR"/../../output/"$PACKAGE_NAME"
-	INPUT_DIR="$BIN_DIR"/../../input/"$PACKAGE_NAME"
-	CONF_DIR="$BIN_DIR"/../../etc/"$PACKAGE_NAME"
-	LOG_DIR="$BIN_DIR"/../../log/"$PACKAGE_NAME"
-fi
 
-
-LOG_FILE_PATH="${LOG_DIR}/${SCRIPT_NAME}.log"
