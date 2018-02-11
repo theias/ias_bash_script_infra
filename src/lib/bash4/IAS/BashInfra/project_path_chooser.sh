@@ -1,3 +1,6 @@
+echo "bin: $BASH_FINDBIN_BIN"
+echo "Realbin: $BASH_FINDBIN_REALBIN"
+
 function set_project_chosen_bin
 {
 	local wanted
@@ -33,13 +36,16 @@ if [[ -z "$IAS_BASH_INFRA_LIB_DIR" ]]; then
 	IAS_BASH_INFRA_LIB_DIR="${LIB_INST_DIR}/IAS/BashInfra"
 fi
 
-PROJECT_CHOSEN_BIN="$PROJECT_CHOSEN_BIN"
-if [[ -z $PROJECT_BIN_DIR ]]; then
 
+PROJECT_BIN_DIR="$PROJECT_BIN_DIR"
+PROJECT_CHOSEN_BIN="$PROJECT_CHOSEN_BIN"
+if [[ -z "$PROJECT_BIN_DIR" ]]; then
 	if [[ ! -z ${PROJECT_CHOSEN_BIN+x} ]]; then
 		PROJECT_CHOSEN_BIN='REALBIN'
 	fi
-	PROJECT_BIN_DIR=`set_project_chosen_bin "${PROJECT_CHOSEN_BIN}"`
+	
+	set_project_chosen_bin "${PROJECT_CHOSEN_BIN}"
+
 fi
 
 

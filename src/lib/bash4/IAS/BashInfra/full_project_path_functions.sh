@@ -46,6 +46,11 @@ function get_full_project_generic_dir
 	fi
 }
 
+function get_bin_dir
+{
+	echo `get_project_whence`
+}
+
 function get_input_dir
 {
 	echo `get_full_project_generic_dir input`

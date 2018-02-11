@@ -30,7 +30,7 @@ function get_output_file_name
 function get_log_file_path
 {
 	local log_dir=`get_log_dir`
-	echo `${log_dir}/${SCRIPT_NAME}.log`
+	echo "${log_dir}/${SCRIPT_NAME}.log"
 }
 
 function write_error
