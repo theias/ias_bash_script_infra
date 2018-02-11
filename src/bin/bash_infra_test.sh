@@ -27,7 +27,7 @@ write_log_start
 
 output_file_name=`get_output_file_name`
 
-debug_project_variables
+# debug_project_variables
 echo "Here is the configuration file example_config.conf:"
 cat "`get_conf_dir`"/example_config.conf
 

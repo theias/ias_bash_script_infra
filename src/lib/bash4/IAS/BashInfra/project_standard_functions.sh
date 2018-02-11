@@ -11,7 +11,7 @@ function get_output_file_name
 		remainder='generic.txt'
 	fi
 	
-	output_file_date=$( $DATE "+%Y-%m-%d-%H-%M-%S" )
+	output_file_date=$( date "+%Y-%m-%d-%H-%M-%S" )
 
 	local full_output_dir
 	local output_dir=`get_output_dir`
@@ -59,7 +59,6 @@ function project_is_bin_dir_in_src
 	# >&2 echo "SOME BIN DIR: $some_bin_dir"
 	
 	if [ -d "$some_bin_dir/../../src" ]; then
-		>&2 echo "GOT HERE"
 		return 0
 	fi
 	return 1
