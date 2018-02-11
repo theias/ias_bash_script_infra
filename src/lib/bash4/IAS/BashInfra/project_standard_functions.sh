@@ -54,9 +54,9 @@ function project_is_bin_dir_in_src
 	# TODO: This must be changed to test if the second-to-last
 	# component in the path to the bin dir is src; not that 2
 	# levels up src exists...
-	local some_bin_dir
+	local some_bin_dir=`get_project_whence`
 	some_bin_dir="$1"
-	>&2 echo "SOME BIN DIR: $some_bin_dir"
+	# >&2 echo "SOME BIN DIR: $some_bin_dir"
 	
 	if [ -d "$some_bin_dir/../../src" ]; then
 		>&2 echo "GOT HERE"
