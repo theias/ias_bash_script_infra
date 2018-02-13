@@ -66,9 +66,9 @@ function write_logger_syslog_message
 	fi
 	
 	logger_options=( \
-		"--tag=$0" \
+		"--tag=$0[$$]" \
 		'--priority' $log_priority \
-		"--id=$$" \
+#		"--id=$$" \
 	)
 	
 	if [[ "$LOG_TO_STDERR" == "1" ]]
