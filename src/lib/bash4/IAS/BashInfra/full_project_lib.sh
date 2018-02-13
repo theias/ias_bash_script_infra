@@ -2,7 +2,7 @@
 
 IAS_BASH_INFRA_LIB_DIR="$IAS_BASH_INFRA_LIB_DIR"
 if [[ -z "$IAS_BASH_INFRA_LIB_DIR" ]]; then
-	IAS_BASH_INFRA_LIB_DIR=`basename "${BASH_SOURCE}"`
+	IAS_BASH_INFRA_LIB_DIR=`dirname "${BASH_SOURCE}"`
 fi
 
 . $IAS_BASH_INFRA_LIB_DIR/full_project_variables.sh
