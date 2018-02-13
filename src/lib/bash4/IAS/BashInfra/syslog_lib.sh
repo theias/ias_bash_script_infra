@@ -48,7 +48,8 @@ LOGGER=/usr/bin/logger
 
 function check_logging_setup
 {
-
+	:
+	# echo "blank for now."
 }
 
 function write_logger_syslog_message
