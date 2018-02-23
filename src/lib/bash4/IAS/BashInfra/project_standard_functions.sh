@@ -101,3 +101,53 @@ function attention_if_fewer_lines
 	fi
 	return 1
 }
+
+function get_newest_file_in_dir
+{
+	local dir
+	dir="$1"
+
+	if ! [[ -d "$dir" ]]; then
+		>&2 echo $dir not a directory
+		return
+	fi
+
+	local latest
+	for f in "$dir"/*; do
+		[[ -f $f ]] || continue
+		[[ $f -nt $latest ]] && latest=$f
+	done
+
+	if [[ -z "$latest" ]]; then
+		return
+	fi
+	echo $latest
+	return
+}
+
+function append_all_newest_files_in_dir
+{
+	local output_file
+	local dir
+
+	output_file="$1"
+	dir="$2"
+
+	if ! [[ -d "$dir" ]]; then
+		>&2 printf "%s is not a directory" $dir
+	fi
+
+	find -H "$dir"/* -type d -print0 | while IFS= read -r -d '' i
+	do
+		file_name=`get_newest_file_in_dir "$i"`
+		write_log_informational "Adding: $file_name"
+		# echo "file: " $file_name
+		if [[ "$file_name" == *.gz ]]; then
+			gunzip -c -- "$file_name" >> "$output_file"
+		else
+			cat -- "$file_name" >> "$output_file"
+		fi
+		
+	done
+}
+
