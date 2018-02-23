@@ -83,7 +83,6 @@ function dump_error_log_file
 
 function get_somebodys_attention
 {
-	>&2 echo "$@"
 	write_log_error "$@"
 }
 
