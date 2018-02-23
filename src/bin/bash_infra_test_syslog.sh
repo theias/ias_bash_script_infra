@@ -33,6 +33,7 @@ cat "`get_conf_dir`"/example_config.conf
 
 write_log_informational "Wrote: ${output_file_name}"
 write_log_informational "Exit status: ${exit_status}"
+write_log_error "This is an error."
 
 write_log_end
 
