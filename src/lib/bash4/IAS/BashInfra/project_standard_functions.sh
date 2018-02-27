@@ -64,6 +64,23 @@ function project_is_bin_dir_in_src
 	return 1
 }
 
+function dump_output_log_file
+{
+	local output_log_file="$1"
+	
+	if [[ -s "$output_log_file" ]]; then
+		write_log_informational "Output log follows."
+		write_log_informational "******** BEGIN OUTPUT LOG ********"
+		cat "$output_log_file" | while read i
+		do
+			write_log_informational "$i"
+		done
+		write_log_informational "******** END OUTPUT LOG ********"
+	fi
+
+	rm $output_log_file
+}
+
 function dump_error_log_file
 {
 	local error_log_file="$1"
