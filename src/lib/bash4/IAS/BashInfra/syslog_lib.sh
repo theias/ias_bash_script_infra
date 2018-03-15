@@ -17,11 +17,16 @@
 #	Defaults to "local3"
 #	Please see man syslog for more information.
 # LOG_TO_STDERR - log messages to STDERR
-# LOG_DEBUG - write debug messages
+# LOG_ERRORS_TO_STDERR - log error messages to standard error
 
 LOGGER_SYSLOG_FACILITY="local3"
 
 LOGGER=/usr/bin/logger
+
+if [ -z ${LOG_ERRORS_TO_STDERR+x} ]
+then
+	LOG_ERRORS_TO_STDERR=1
+fi
 
 # Everything after this point is used for development purposes
 
@@ -53,12 +58,11 @@ function check_logging_setup
 
 function write_logger_syslog_message
 {
-	local log_priority
-	local msg
+	local log_priority="$1"
+	local msg="$2"
 
-	log_priority="$1"
-	msg="$2"
-	
+	local log_to_stderr="$3"
+
 	if [[ -z "$msg" ]]
 	then
 		msg="Empty log message"
@@ -70,7 +74,7 @@ function write_logger_syslog_message
 #		"--id=$$" \
 	)
 	
-	if [[ "$LOG_TO_STDERR" == "1" ]]
+	if [[ "$LOG_TO_STDERR" == "1" || "$log_to_stderr" == "1" ]]
 	then
 		logger_options=('-s' "${logger_options[@]}");
 	fi
@@ -90,7 +94,7 @@ write_logger_syslog_alert ()
 	local msg
 	msg="$@"
 
-	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.alert" "$msg"
+	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.alert" "$msg" "$LOG_ERRORS_TO_STDERR"
 }
 
 write_log_critical ()
@@ -105,7 +109,7 @@ write_logger_syslog_critical ()
 	local msg
 	msg="$@"
 
-	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.crit" "$msg"
+	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.crit" "$msg" "$LOG_ERRORS_TO_STDERR"
 }
 
 write_log_debug ()
@@ -138,7 +142,7 @@ write_logger_syslog_emergency ()
 	local msg
 	msg="$@"
 
-	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.emerg" "$msg"
+	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.emerg" "$msg" "$LOG_ERRORS_TO_STDERR"
 }
 
 write_log_error ()
@@ -153,7 +157,7 @@ write_logger_syslog_error ()
 	local msg
 	msg="$@"
 
-	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.error" "$msg"
+	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.error" "$msg" "$LOG_ERRORS_TO_STDERR"
 }
 
 write_log_informational ()
@@ -183,7 +187,7 @@ write_logger_syslog_notice ()
 	local msg
 	msg="$@"
 
-	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.notice" "$msg"
+	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.notice" "$msg" "$LOG_ERRORS_TO_STDERR"
 }
 
 write_log_warning ()
@@ -198,5 +202,5 @@ write_logger_syslog_warning ()
 	local msg
 	msg="$@"
 
-	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.warning" "$msg"
+	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.warning" "$msg" "$LOG_ERRORS_TO_STDERR"
 }

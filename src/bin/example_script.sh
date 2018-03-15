@@ -30,6 +30,7 @@ write_log_debug "Here is a debug message."
 
 write_log_informational "Wrote: ${output_file_name}"
 write_log_informational "Exit status: ${exit_status}"
+write_log_error "This is an error."
 
 write_log_end
 

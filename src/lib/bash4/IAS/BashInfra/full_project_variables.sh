@@ -1,16 +1,18 @@
 #!/bin/bash
 
+function get_script_name
+{
+	echo $SCRIPT_NAME
+}
+
 function debug_project_variables
 {
+	# TODO: These need to be corrected.
 	echo "USER: ${USER}"
 	echo "HOME: ${HOME}"
-	echo "Bin dir: $BIN_DIR"
+	echo "Bin dir: " `get_bin_dir`
 	echo "Environment: $ENVIRONMENT"
-	echo "Script path: $BIN_DIR"
 	echo "Package name: $PACKAGE_NAME"
-	echo "Output dir: $OUTPUT_DIR"
-	echo "Input dir: $INPUT_DIR"
-	echo "Conf dir: $CONF_DIR"
 	echo "Script file: " $SCRIPT_FILE
 	echo "Script name: " $SCRIPT_NAME
 	echo "Script extension: "$SCRIPT_EXTENSION
