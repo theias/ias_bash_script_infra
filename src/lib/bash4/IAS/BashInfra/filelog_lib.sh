@@ -5,6 +5,8 @@
 # LOG_TO_STDERR - log messages to STDERR
 # LOG_DEBUG - log debug messages
 
+# TODO : LOG_ERRORS_TO_STD_ERROR
+
 LOG_FILE_PATH="$LOG_FILE_PATH"
 if [[ -z "$LOG_FILE_PATH" ]]; then
 	LOG_FILE_PATH=`get_log_file_path`
