@@ -46,6 +46,26 @@ function get_full_project_generic_dir
 	fi
 }
 
+function get_full_project_lib_dir
+{
+	local some_bin_dir
+	local dir_name
+	some_bin_dir=`get_project_whence`
+	dir_name="$1"
+	
+	if project_is_bin_dir_in_src $some_bin_dir ; then
+		echo "${some_bin_dir}/../$dir_name"
+		# >&2 echo "We are in src."
+		return
+	else
+		local package_name
+		package_name=`get_project_package_name "$some_bin_dir"`
+		echo "${some_bin_dir}/$FULL_PROJECT_INSTALLED_UP_PATHS/${dir_name}"
+		# >&2 echo "We are installed."
+		return
+	fi
+}
+
 function get_bin_dir
 {
 	echo `get_project_whence`
@@ -73,7 +93,7 @@ function get_log_dir
 
 function get_lib_dir
 {
-	echo `get_full_project_generic_dir lib`	
+	echo `get_full_project_lib_dir lib`	
 }
 
 function get_template_dir
