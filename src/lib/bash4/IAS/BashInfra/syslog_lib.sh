@@ -17,10 +17,9 @@
 #	Defaults to "local3"
 #	Please see man syslog for more information.
 # LOG_TO_STDERR - log messages to STDERR
+# LOG_DEBUG - write debug messages
 
-LOG_DEBUG=0
 LOGGER_SYSLOG_FACILITY="local3"
-LOG_TO_STDERR=0
 
 LOGGER=/usr/bin/logger
 
@@ -121,12 +120,10 @@ write_logger_syslog_debug ()
 	local msg
 	msg="$@"
 
-	if [[ "$LOG_DEBUG" == "0" ]]
+	if [[ "$LOG_DEBUG" == "1" ]]
 	then
-		return
+		write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.debug" "$msg"
 	fi
-	
-	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.debug" "$msg"
 }
 
 write_log_emergency ()

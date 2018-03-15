@@ -3,9 +3,7 @@
 
 #	Please see man syslog for more information.
 # LOG_TO_STDERR - log messages to STDERR
-
-LOG_DEBUG=0
-LOG_TO_STDERR=0
+# LOG_DEBUG - log debug messages
 
 LOG_FILE_PATH="$LOG_FILE_PATH"
 if [[ -z "$LOG_FILE_PATH" ]]; then
@@ -84,12 +82,11 @@ function write_logfile_debug
 	local msg
 	msg="$@"
 
-	if [[ "$LOG_DEBUG" == "0" ]]
+	if [[ "$LOG_DEBUG" == "1" ]]
 	then
-		return
+		write_logfile_message "debug" "$msg"
 	fi
 	
-	write_logfile_message "debug" "$msg"
 }
 
 function write_log_emergency
