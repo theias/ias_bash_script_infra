@@ -19,7 +19,7 @@ function bash_findbin_resolve_path
 	resolve_this="$1"
 	iteration="$2"
 	
-	>&2 echo "Resolving: $resolve_this"
+	# >&2 echo "Resolving: $resolve_this"
 	
 	if [[ ! -z ${iteration+x} ]]; then
 		iteration=1
@@ -40,7 +40,7 @@ function bash_findbin_resolve_path
 			return
 		fi
 	fi
-	>&2 echo GOT HERE $resolve_this
+	# >&2 echo GOT HERE $resolve_this
 	
 	echo "$resolve_this"
 }

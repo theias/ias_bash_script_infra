@@ -1,3 +1,9 @@
+ias-bash-script-infra 1.2.1-0 noarch; urgency=low
+
+	* Bux fixes
+
+ -- Martin VanWinkle mvanwinkle@ias.edu  Thu, 24 May 2018 11:57:21 -0400
+
 ias-bash-script-infra 1.2.0-0 noarch; urgency=low
 
 	* Another release

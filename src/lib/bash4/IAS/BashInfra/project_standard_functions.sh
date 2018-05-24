@@ -85,6 +85,12 @@ function dump_error_log_file
 {
 	local error_log_file="$1"
 	
+	if [[ ! -e "$error_log_file" ]]
+	then
+		write_log_error "Told to dumpe_error_log_file on non-existent file."
+		return
+	fi
+	
 	if [[ -s "$error_log_file" ]]; then
 		write_log_error "Error log follows."
 		write_log_error "******** BEGIN ERROR LOG ********"
