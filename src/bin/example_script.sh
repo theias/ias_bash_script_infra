@@ -7,6 +7,7 @@
 
 
 # NOTE: This runs against the INSTALLED version of FindBin...
+
 LOG_TO_FILE='1'
 . /opt/IAS/lib/bash4/IAS/BashInfra/full_project_lib.sh
 
@@ -27,7 +28,6 @@ echo "Here is the configuration file example_config.conf:"
 cat `get_conf_dir`/example_config.conf
 
 write_log_debug "Here is a debug message."
-
 write_log_informational "Wrote: ${output_file_name}"
 write_log_informational "Exit status: ${exit_status}"
 write_log_error "This is an error."

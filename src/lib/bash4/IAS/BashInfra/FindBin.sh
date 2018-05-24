@@ -9,7 +9,7 @@ fi
 
 BASH_FINDBIN_BIN="$( cd "$(dirname "$BASH_FINDBIN_SCRIPT")" ; pwd )"
 
-BASH_FINDBIN_REALPATH="/usr/bin/realpath"
+BASH_FINDBIN_READLINK="/bin/readlink"
 
 function bash_findbin_resolve_path
 {
@@ -18,6 +18,8 @@ function bash_findbin_resolve_path
 	
 	resolve_this="$1"
 	iteration="$2"
+	
+	>&2 echo "Resolving: $resolve_this"
 	
 	if [[ ! -z ${iteration+x} ]]; then
 		iteration=1
@@ -28,15 +30,17 @@ function bash_findbin_resolve_path
 		return
 	fi
 	
-	local real_path
-	real_path=`${BASH_FINDBIN_REALPATH} "$resolve_this"`
+	if [[ -h "$resolve_this" ]]
+	then
+		local real_path
+		real_path=`${BASH_FINDBIN_READLINK} "$resolve_this"`
 	
-	if [[ "$resolve_this" != "$real_path" ]]; then
-		bash_findbin_resolve_path "$real_path" "$iteration"
-		return
+		if [[ "$resolve_this" != "$real_path" ]]; then
+			bash_findbin_resolve_path "$real_path" "$iteration"
+			return
+		fi
 	fi
-	
-	# >&2 echo GOT HERE $resolve_this
+	>&2 echo GOT HERE $resolve_this
 	
 	echo "$resolve_this"
 }
