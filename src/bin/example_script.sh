@@ -5,10 +5,11 @@
 #################################
 # Include this for Bash goodness
 
-
-# NOTE: This runs against the INSTALLED version of FindBin...
-
+# How to log to files instead.
+# Will log to ../log/(somewhere); mkdir the directory
+# and logging to files will work.
 LOG_TO_FILE='1'
+
 . /opt/IAS/lib/bash4/IAS/BashInfra/full_project_lib.sh
 
 if [[ ! -d `get_project_whence` ]]; then
@@ -16,6 +17,8 @@ if [[ ! -d `get_project_whence` ]]; then
 	exit 1
 fi
 
+# If you have subroutines you abstracted to a file called
+# bash_lib.sh, here's how you'd load them:
 . ${BASH_FINDBIN_REALBIN}/bash_lib.sh
 
 #################################

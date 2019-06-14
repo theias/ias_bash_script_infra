@@ -1,3 +1,3 @@
 #!/bin/bash
 
-# Put lobrary stuff here.
+# Put library stuff here.
