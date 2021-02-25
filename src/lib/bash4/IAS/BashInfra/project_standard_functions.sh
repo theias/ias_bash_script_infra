@@ -51,14 +51,17 @@ function write_log_end
 
 function project_is_bin_dir_in_src
 {
-	# TODO: This must be changed to test if the second-to-last
-	# component in the path to the bin dir is src; not that 2
-	# levels up src exists...
-	local some_bin_dir=`get_project_whence`
-	some_bin_dir="$1"
-	# >&2 echo "SOME BIN DIR: $some_bin_dir"
-	
-	if [ -d "$some_bin_dir/../../src" ]; then
+	# Returns true if a path ends with src/something
+	local dir_arg="$1"
+	# echo "Passed: $dir_arg"
+	local dir="${dir_arg:-`get_project_whence`}"
+	# echo "Examaning: $dir"
+
+	dir=$(dirname "$dir")
+	dir=$(basename "$dir")
+
+	if [[ "$dir" = "src" ]]
+	then
 		return 0
 	fi
 	return 1

@@ -21,6 +21,8 @@ output_file_name=`get_output_file_name`
 echo "Here is the configuration file example_config.conf:"
 cat `get_conf_dir`/example_config.conf
 
+date >> "$output_file_name"
+
 write_log_debug "Here is a debug message."
 write_log_informational "Wrote: ${output_file_name}"
 write_log_informational "Exit status: ${exit_status}"
