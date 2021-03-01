@@ -1,15 +1,12 @@
-personal_ws-1.1 en 14 
+personal_ws-1.1 en 11
 rpmspec
 debsetup
 debbuild
 repo
 deps
-script
 MERCHANTABILITY
-infra
 fakeroot
 rpmbuild
 cp
 RHEL
-bash
-ias
+IAS
