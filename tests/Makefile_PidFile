@@ -8,6 +8,10 @@ debug:
 	@echo "Makefile path: $(MAKEFILE_PATH)"
 	@echo "bin_dir: $(bin_dir)"
 
+.PHONY: test_all_pidfile_things
+test_all_pidfile_things: \
+	test_pidfile_conflict_run
+
 # This does a couple of interesting things which might be better
 # than not doing interesting things.
 #
@@ -19,8 +23,8 @@ debug:
 #
 # Yeah, it's a set of race conditions, but that's what this pidfile stuff
 # is at least supposed to mitigate.
-.PHONY: test_pid_file_conflict_run
-test_pid_file_conflict_run:
+.PHONY: test_pidfile_conflict_run
+test_pidfile_conflict_run:
 	export pidfile_dir=`mktemp -d` && \
 	echo "pidfile_dir: $$pidfile_dir" && \
 	( $(bin_dir)/pidfile_example.sh 3 & ) && \
