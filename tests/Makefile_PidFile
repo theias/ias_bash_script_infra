@@ -1,0 +1,19 @@
+MAKEFILE_PATH = $(strip $(dir $(firstword $(MAKEFILE_LIST))))
+SHELL := /bin/bash
+
+bin_dir=$(MAKEFILE_PATH)../src/bin
+
+.PHONY: debug
+debug:
+	@echo "Makefile path: $(MAKEFILE_PATH)"
+	@echo "bin_dir: $(bin_dir)"
+
+.PHONY: test_pid_file_conflict_run
+test_pid_file_conflict_run:
+	export pidfile_dir=`mktemp -d` && \
+	echo "pidfile_dir: $$pidfile_dir" && \
+	mkdir -p "$$pidfile_dir" && \
+	(pidfile_dir=$$pidfile_dir $(bin_dir)/pidfile_example.sh 3 & ) # && \
+	# sleep 1 && \
+	# ! $(bin_dir)/pidfile_example.sh
+	

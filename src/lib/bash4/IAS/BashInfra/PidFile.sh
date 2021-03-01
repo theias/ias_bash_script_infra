@@ -7,7 +7,7 @@ function get_pidfile_name
 	# echo "In fuction: $BASH_SOURCE"
 	# echo "Dollar zero: $0"
 
-	pidfile_dir=${pid_file_dir:-/tmp}
+	pidfile_dir=${pidfile_dir:-/tmp}
 
 	local file_without_extension=$(basename "$0")
 	file_without_extension="${file_without_extension%.*}"

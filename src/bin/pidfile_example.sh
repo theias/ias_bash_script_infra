@@ -26,6 +26,8 @@ PATH="${libdir}/$bash_infra_lib_dir:/opt/IAS/lib/bash4/$bash_infra_lib_dir:${PAT
 
 to=${1:-10}
 
+# This is how you change the location of the pidfile dir:
+# pidfile_dir=/var/tmp
 pidfile=$(get_pidfile_name)
 
 echo "Pidfile name: $pidfile"
