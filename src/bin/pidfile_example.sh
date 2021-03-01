@@ -11,6 +11,12 @@
 #
 # The (optional) first argument to this script is how high to count.
 
+# Please note, that the PATH variable manipulation done here shouldn't
+# be necessary if you're "linking" against the installed version of this
+# project.  If you have this project installed, you can (and should) replace:
+# 	. PidFile.sh
+# with
+#	/opt/IAS/lib/bash4/IAS/BashInfra/PidFile.sh
 rp=$(dirname $(realpath "$0"))
 libdir="$rp/../lib/bash4"
 bash_infra_lib_dir="IAS/BashInfra"
