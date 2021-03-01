@@ -16,7 +16,7 @@
 # project.  If you have this project installed, you can (and should) replace:
 # 	. PidFile.sh
 # with
-#	/opt/IAS/lib/bash4/IAS/BashInfra/PidFile.sh
+#	. /opt/IAS/lib/bash4/IAS/BashInfra/PidFile.sh
 rp=$(dirname $(realpath "$0"))
 libdir="$rp/../lib/bash4"
 bash_infra_lib_dir="IAS/BashInfra"
