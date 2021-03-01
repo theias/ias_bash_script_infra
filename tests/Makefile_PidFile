@@ -8,12 +8,24 @@ debug:
 	@echo "Makefile path: $(MAKEFILE_PATH)"
 	@echo "bin_dir: $(bin_dir)"
 
+# This does a couple of interesting things which might be better
+# than not doing interesting things.
+#
+# It runs the "good" process in a subshell, which should run for (at least) 3 seconds
+# It sleeps for 1 second
+# It runs a second process which is supposed to detect the first process running
+# Then it sleeps for an additional 3 seconds (necessary) so that the first process
+# has time to exit.
+#
+# Yeah, it's a set of race conditions, but that's what this pidfile stuff
+# is at least supposed to mitigate.
 .PHONY: test_pid_file_conflict_run
 test_pid_file_conflict_run:
 	export pidfile_dir=`mktemp -d` && \
 	echo "pidfile_dir: $$pidfile_dir" && \
-	mkdir -p "$$pidfile_dir" && \
-	(pidfile_dir=$$pidfile_dir $(bin_dir)/pidfile_example.sh 3 & ) # && \
-	# sleep 1 && \
-	# ! $(bin_dir)/pidfile_example.sh
+	( $(bin_dir)/pidfile_example.sh 3 & ) && \
+	sleep 1 && \
+	! $(bin_dir)/pidfile_example.sh && \
+	sleep 3 && \
+	rmdir "$$pidfile_dir"
 	
