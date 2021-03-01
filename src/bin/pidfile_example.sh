@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# This is an example script for how to use the PidFile.sh library
+# It, by default, will count to 10 and sleep for one second for each value.
+# You can try to run another instance of the script while it's running, and
+# that other instance should exit.
+#
+# This script should clean up its pidfile after itself (provided
+# it's not interrupted) and should run if the process ID
+# in a stale pidfile is not running (checked via kill -0)
+#
+# The (optional) first argument to this script is how high to count.
+
 rp=$(dirname $(realpath "$0"))
 libdir="$rp/../lib/bash4"
 bash_infra_lib_dir="IAS/BashInfra"
