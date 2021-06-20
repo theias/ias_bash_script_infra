@@ -1,0 +1,22 @@
+MAKEFILE_PATH = $(strip $(dir $(firstword $(MAKEFILE_LIST))))
+SHELL := /bin/bash
+
+bin_dir=$(MAKEFILE_PATH)../src/bin
+
+.PHONY: debug
+debug:
+	@echo "Makefile path: $(MAKEFILE_PATH)"
+	@echo "bin_dir: $(bin_dir)"
+
+.PHONY: test_all_main_scripts
+test_all_main_scripts: \
+	test_simple_script \
+	test_complex_script
+
+.PHONY: test_simple_script
+test_simple_script:
+	$(bin_dir)/simple_example_script.sh
+
+.PHONY: test_complex_script
+test_complex_script:
+	$(bin_dir)/complex_example_script.sh
