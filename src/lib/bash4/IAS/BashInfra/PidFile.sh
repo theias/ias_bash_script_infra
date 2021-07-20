@@ -16,9 +16,9 @@ function get_pidfile_name
 	echo $pidfile_name
 }
 
-# Checks if a process is alive by sending a kill 0 to the
+# Checks if a process is killable by sending a kill 0 to the
 # process ID of the process.
-function is_process_alive
+function is_process_killable
 {
 	local pid="$1"
 	if [[ -z "$pid" ]]
@@ -76,7 +76,7 @@ function init_pid_file
 	then # If the pidfile exists
 		# Get the pid
 		local pid=$(get_pid_from_pidfile "$pidfile")
-		if is_process_alive "$pid"
+		if is_process_killable "$pid"
 		then # If the process is alive
 			# echo "Minutes: $minutes"
 			if [[ ! -z "$minutes" ]]
@@ -122,5 +122,5 @@ function cleanup_pidfile
 	then
 		>&2 echo "Cleaning up pidfile ($pidfile , $pid)  not belonging to my process ($$)..."
 	fi
-	rm "$pidfile"
+	rm -f "$pidfile"
 }
