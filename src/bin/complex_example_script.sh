@@ -1,5 +1,7 @@
 #!/bin/bash
 
+all_arguments=( $@ )
+
 # If you MUST load an environment file:
 # ENVIRONMENT_CONFIG_REQUIRED=1
 #################################
@@ -25,9 +27,10 @@ fi
 
 # Note:  Your package installer *should* automatically create the log directory
 # for you.  This is here for testing purposes.
-mkdir -p `get_log_dir`
+# mkdir -p `get_log_dir`
 
 write_log_start
+write_log_informational "Arguments: ${all_arguments[@]}"
 
 output_file_name=`get_output_file_name`
 
