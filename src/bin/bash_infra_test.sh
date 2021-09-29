@@ -1,27 +1,14 @@
 #!/bin/bash
 
-# If you MUST load an environment file:
-# ENVIRONMENT_CONFIG_REQUIRED=1
-#################################
-# Include this for Bash goodness
-
 
 # NOTE: This runs against the SOURCE TREE version of FindBin...
 LOG_TO_FILE='1'
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -L )"
 IAS_BASH_INFRA_LIB_DIR="${SCRIPT_PATH}/../lib/bash4/IAS/BashInfra/"
 
-. $IAS_BASH_INFRA_LIB_DIR/full_project_lib.sh
+. $IAS_BASH_INFRA_LIB_DIR/full_project_lib.sh || exit 1
 
-if [[ ! -d `get_bin_dir` ]]; then
-	unfound_bin_dir=`get_bin_dir`
-	echo "The directory, '${unfound_bin_dir}' , does not exist"
-	exit 1
-fi
-
-. ${BASH_FINDBIN_REALBIN}/bash_lib.sh
-
-#################################
+. ${BASH_FINDBIN_REALBIN}/bash_lib.sh || exit 1
 
 write_log_start
 
