@@ -17,7 +17,7 @@
 # 	. PidFile.sh
 # with
 #	. /opt/IAS/lib/bash4/IAS/BashInfra/PidFile.sh
-rp=$(dirname $(realpath "$0"))
+rp=$(dirname "$(realpath "$0")")
 libdir="$rp/../lib/bash4"
 bash_infra_lib_dir="IAS/BashInfra"
 PATH="${libdir}/$bash_infra_lib_dir:/opt/IAS/lib/bash4/$bash_infra_lib_dir:${PATH}"
@@ -38,7 +38,7 @@ then
 fi
 	
 
-for i in `seq 1 $to`
+for i in $(seq 1 "$to")
 do
 	date
 	echo "Loop $i"
