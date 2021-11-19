@@ -70,7 +70,7 @@ function write_logger_syslog_message
 	
 	logger_options=( \
 		"--tag=$0[$$]" \
-		'--priority' $log_priority \
+		'--priority' "$log_priority" \
 #		"--id=$$" \
 	)
 	
@@ -78,21 +78,23 @@ function write_logger_syslog_message
 	then
 		logger_options=('-s' "${logger_options[@]}");
 	fi
-	"$LOGGER" ${logger_options[@]} "$msg"
+
+	echo "Command:" "$LOGGER" "${logger_options[@]}" "$msg"
+	"$LOGGER" "${logger_options[@]}" "$msg"
 	
 }
 
 write_log_alert ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 	write_logger_syslog_alert "$msg"
 }
 
 write_logger_syslog_alert ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 
 	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.alert" "$msg" "$LOG_ERRORS_TO_STDERR"
 }
@@ -100,14 +102,14 @@ write_logger_syslog_alert ()
 write_log_critical ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 	write_logger_syslog_critical "$msg"
 }
 
 write_logger_syslog_critical ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 
 	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.crit" "$msg" "$LOG_ERRORS_TO_STDERR"
 }
@@ -115,14 +117,14 @@ write_logger_syslog_critical ()
 write_log_debug ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 	write_logger_syslog_debug "$msg"
 }
 
 write_logger_syslog_debug ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 
 	if [[ "$LOG_DEBUG" == "1" ]]
 	then
@@ -133,14 +135,14 @@ write_logger_syslog_debug ()
 write_log_emergency ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 	write_logger_syslog_emergency "$msg"
 }
 
 write_logger_syslog_emergency ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 
 	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.emerg" "$msg" "$LOG_ERRORS_TO_STDERR"
 }
@@ -148,14 +150,14 @@ write_logger_syslog_emergency ()
 write_log_error ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 	write_logger_syslog_error "$msg"
 }
 
 write_logger_syslog_error ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 
 	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.error" "$msg" "$LOG_ERRORS_TO_STDERR"
 }
@@ -163,14 +165,14 @@ write_logger_syslog_error ()
 write_log_informational ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 	write_logger_syslog_informational "$msg"
 }
 
 write_logger_syslog_informational ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 
 	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.info" "$msg"
 }
@@ -178,14 +180,14 @@ write_logger_syslog_informational ()
 write_log_notice ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 	write_logger_syslog_notice "$msg"
 }
 
 write_logger_syslog_notice ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 
 	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.notice" "$msg" "$LOG_ERRORS_TO_STDERR"
 }
@@ -193,14 +195,14 @@ write_logger_syslog_notice ()
 write_log_warning ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 	write_logger_syslog_warning "$msg"
 }
 
 write_logger_syslog_warning ()
 {
 	local msg
-	msg="$@"
+	msg="$*"
 
 	write_logger_syslog_message "$LOGGER_SYSLOG_FACILITY.warning" "$msg" "$LOG_ERRORS_TO_STDERR"
 }
