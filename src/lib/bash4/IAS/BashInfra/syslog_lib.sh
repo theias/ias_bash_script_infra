@@ -79,7 +79,7 @@ function write_logger_syslog_message
 		logger_options=('-s' "${logger_options[@]}");
 	fi
 
-	echo "Command:" "$LOGGER" "${logger_options[@]}" "$msg"
+	#  echo "Command:" "$LOGGER" "${logger_options[@]}" "$msg"
 	"$LOGGER" "${logger_options[@]}" "$msg"
 	
 }
