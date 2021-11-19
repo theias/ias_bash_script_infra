@@ -28,7 +28,7 @@ function get_project_whence
 PROJECT_BIN_DIR="$PROJECT_BIN_DIR"
 PROJECT_CHOSEN_BIN="$PROJECT_CHOSEN_BIN"
 if [[ -z "$PROJECT_BIN_DIR" ]]; then
-	if [[ -n ${PROJECT_CHOSEN_BIN+x} ]]; then
+	if [[ -z "${PROJECT_CHOSEN_BIN}" ]]; then
 		PROJECT_CHOSEN_BIN='REALBIN'
 	fi
 	
