@@ -14,7 +14,8 @@ function get_output_file_name
 	output_file_date=$( date "+%Y-%m-%d-%H-%M-%S" )
 
 	local full_output_dir
-	local output_dir=$(get_output_dir)
+	local output_dir
+	output_dir=$(get_output_dir)
 	full_output_dir="$output_dir/$SCRIPT_NAME"
 
 	if mkdir -p "$full_output_dir"; then
@@ -29,7 +30,8 @@ function get_output_file_name
 
 function get_log_file_path
 {
-	local log_dir=$(get_log_dir)
+	local log_dir
+	log_dir=$(get_log_dir)
 	echo "${log_dir}/${SCRIPT_NAME}.log"
 }
 
@@ -54,7 +56,8 @@ function project_is_bin_dir_in_src
 	# Returns true if a path ends with src/something
 	local dir_arg="$1"
 	# echo "Passed: $dir_arg"
-	local dir="${dir_arg:-`get_project_whence`}"
+	local dir
+	dir="${dir_arg:-$(get_project_whence)}"
 	# echo "Examaning: $dir"
 
 	dir=$(dirname "$dir")
@@ -74,10 +77,11 @@ function dump_output_log_file
 	if [[ -s "$output_log_file" ]]; then
 		write_log_informational "Output log follows."
 		write_log_informational "******** BEGIN OUTPUT LOG ********"
-		cat "$output_log_file" | while read i
+		local i
+		while IFS= read -r i
 		do
 			write_log_informational "$i"
-		done
+		done < "$output_log_file"
 		write_log_informational "******** END OUTPUT LOG ********"
 	fi
 
@@ -90,17 +94,18 @@ function dump_error_log_file
 	
 	if [[ ! -e "$error_log_file" ]]
 	then
-		write_log_error "Told to dumpe_error_log_file on non-existent file."
+		write_log_error "Told to dump_error_log_file on non-existent file."
 		return
 	fi
 	
 	if [[ -s "$error_log_file" ]]; then
 		write_log_error "Error log follows."
 		write_log_error "******** BEGIN ERROR LOG ********"
-		cat "$error_log_file" | while read i
+		local i
+		while IFS= read -r i
 		do
 			write_log_error "$i"
-		done
+		done < "$error_log_file"
 		write_log_error "******** END ERROR LOG ********"
 	fi
 
