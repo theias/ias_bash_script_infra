@@ -4,8 +4,7 @@ all_arguments=( "$@" )
 
 . /opt/IAS/lib/bash4/IAS/BashInfra/full_project_lib.sh || exit 1
 
-write_log_start
-write_log_informational "Arguments: " "${all_arguments[@]}"
+write_log_start "${all_arguments[@]}"
 
 output_file_name=$(get_output_file_name)
 

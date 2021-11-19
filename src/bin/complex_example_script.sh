@@ -19,8 +19,7 @@ LOG_TO_FILE='1'
 # for you.
 mkdir -p "$(get_log_dir)" || exit 1
 
-write_log_start
-write_log_informational "Arguments: " "${all_arguments[@]}"
+write_log_start "${all_arguments[@]}"
 
 output_file_name=$(get_output_file_name)
 

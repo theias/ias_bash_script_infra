@@ -7,14 +7,14 @@ function get_output_file_name
 
 	remainder="$1"
 
-	if [[ ! -n "$remainder" ]]; then
+	if [[ -z "$remainder" ]]; then
 		remainder='generic.txt'
 	fi
 	
 	output_file_date=$( date "+%Y-%m-%d-%H-%M-%S" )
 
 	local full_output_dir
-	local output_dir=`get_output_dir`
+	local output_dir=$(get_output_dir)
 	full_output_dir="$output_dir/$SCRIPT_NAME"
 
 	if mkdir -p "$full_output_dir"; then
@@ -29,7 +29,7 @@ function get_output_file_name
 
 function get_log_file_path
 {
-	local log_dir=`get_log_dir`
+	local log_dir=$(get_log_dir)
 	echo "${log_dir}/${SCRIPT_NAME}.log"
 }
 
@@ -41,7 +41,7 @@ function write_error
 
 function write_log_start
 {
-	write_log_informational "$SCRIPT_PATH" "$script_args" $USER $$ --BEGINNING--
+	write_log_informational "$SCRIPT_PATH" "$*" "$USER" "$$" "--BEGINNING--"
 }
 
 function write_log_end
@@ -81,7 +81,7 @@ function dump_output_log_file
 		write_log_informational "******** END OUTPUT LOG ********"
 	fi
 
-	rm $output_log_file
+	rm "$output_log_file"
 }
 
 function dump_error_log_file
@@ -104,7 +104,7 @@ function dump_error_log_file
 		write_log_error "******** END ERROR LOG ********"
 	fi
 
-	rm $error_log_file
+	rm "$error_log_file"
 }
 
 function get_somebodys_attention
@@ -118,7 +118,7 @@ function attention_if_fewer_lines
 	local min_lines="$2"
 	local line_count
 
-	line_count=`wc -l "$file_name" | awk '{print $1}'`
+	line_count=$(wc -l "$file_name" | awk '{print $1}')
 
 
 	if (( line_count < min_lines )); then
@@ -134,7 +134,7 @@ function get_newest_file_in_dir
 	dir="$1"
 
 	if ! [[ -d "$dir" ]]; then
-		>&2 echo $dir not a directory
+		>&2 echo "$dir" not a directory
 		return
 	fi
 
@@ -147,7 +147,7 @@ function get_newest_file_in_dir
 	if [[ -z "$latest" ]]; then
 		return
 	fi
-	echo $latest
+	echo "$latest"
 	return
 }
 
@@ -160,12 +160,12 @@ function append_all_newest_files_in_dir
 	dir="$2"
 
 	if ! [[ -d "$dir" ]]; then
-		>&2 printf "%s is not a directory" $dir
+		>&2 printf "%s is not a directory" "$dir"
 	fi
 
 	find -H "$dir"/* -type d -print0 | while IFS= read -r -d '' i
 	do
-		file_name=`get_newest_file_in_dir "$i"`
+		file_name=$(get_newest_file_in_dir "$i")
 		write_log_informational "Adding: $file_name"
 		# echo "file: " $file_name
 		if [[ "$file_name" == *.gz ]]; then
