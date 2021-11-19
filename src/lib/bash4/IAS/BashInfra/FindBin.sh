@@ -1,22 +1,23 @@
 #!/bin/bash
 
-BASH_FINDBIN_SCRIPT="$0"
+BASH_FINDBIN_SCRIPT=$(basename "$0")
+BASH_FINDBIN_BIN=$(dirname "$(realpath --no-symlinks "$0")")
+
+BASH_FINDBIN_REALSCRIPT=$(basename "$(realpath "$0")")
+BASH_FINDBIN_REALBIN=$(dirname "$(realpath "$0")")
 
 if [[ "$BASH_FINDBIN_SCRIPT" == "-bash" ]]; then
 	 BASH_FINDBIN_SCRIPT="${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}"
 fi
 
-BASH_FINDBIN_SCRIPT=$(basename "$BASH_FINDBIN_SCRIPT")
-BASH_FINDBIN_BIN=$(dirname "$BASH_FINDBIN_SCRIPT")
-BASH_FINDBIN_BIN=$(realpath --no-symlinks "$BASH_FINDBIN_BIN")
 
 function bash_findbin_debug_perl_equiv
 {
-	echo "Bin: ${BASH_FINDBIN_BIN}"
-	echo "Script: ${BASH_FINDBIN_SCRIPT}"
+	echo "\$Bin: ${BASH_FINDBIN_BIN}"
+	echo "\$Script: ${BASH_FINDBIN_SCRIPT}"
 	
-	echo "RealBin: ${BASH_FINDBIN_REALBIN}"
-	echo "RealScript: ${BASH_FINDBIN_REALSCRIPT}"
+	echo "\$RealBin: ${BASH_FINDBIN_REALBIN}"
+	echo "\$RealScript: ${BASH_FINDBIN_REALSCRIPT}"
 }
 
 function bash_findbin_debug
@@ -28,9 +29,6 @@ function bash_findbin_debug
 	echo "BASH_FINDBIN_REALSCRIPT: ${BASH_FINDBIN_REALSCRIPT}"
 }
 
-BASH_FINDBIN_REALSCRIPT=$(realpath "$BASH_FINDBIN_SCRIPT")
-BASH_FINDBIN_REALBIN=$(dirname "$BASH_FINDBIN_REALSCRIPT")
-BASH_FINDBIN_REALSCRIPT=$(basename "$BASH_FINDBIN_REALSCRIPT")
 
 
 if [[ -z "$BASH_FINDBIN_REALSCRIPT" ]]; then
