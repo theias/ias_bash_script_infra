@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function set_project_chosen_bin
 {
 	local wanted
@@ -26,7 +28,7 @@ function get_project_whence
 PROJECT_BIN_DIR="$PROJECT_BIN_DIR"
 PROJECT_CHOSEN_BIN="$PROJECT_CHOSEN_BIN"
 if [[ -z "$PROJECT_BIN_DIR" ]]; then
-	if [[ ! -z ${PROJECT_CHOSEN_BIN+x} ]]; then
+	if [[ -n ${PROJECT_CHOSEN_BIN+x} ]]; then
 		PROJECT_CHOSEN_BIN='REALBIN'
 	fi
 	
