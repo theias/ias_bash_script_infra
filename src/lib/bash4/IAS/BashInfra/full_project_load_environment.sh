@@ -1,6 +1,6 @@
 #!/bin/bash
 
-environment_conf_file="`get_conf_dir`/environment.sh"
+environment_conf_file="$(get_conf_dir)/environment.sh"
 
 if [[ ! -f "$environment_conf_file" ]]; then
 	if [[ "${ENVIRONMENT_CONFIG_REQUIRED}" == '1' ]]; then
