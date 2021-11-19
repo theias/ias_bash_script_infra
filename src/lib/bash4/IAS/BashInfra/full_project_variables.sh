@@ -2,7 +2,7 @@
 
 function get_script_name
 {
-	echo $SCRIPT_NAME
+	echo "$SCRIPT_NAME"
 }
 
 function debug_project_variables
@@ -10,12 +10,13 @@ function debug_project_variables
 	# TODO: These need to be corrected.
 	echo "USER: ${USER}"
 	echo "HOME: ${HOME}"
-	echo "Bin dir: " `get_bin_dir`
+	echo "Bin dir: " "$(get_bin_dir)"
 	echo "Environment: $ENVIRONMENT"
-	echo "Package name: $PACKAGE_NAME"
-	echo "Script file: " $SCRIPT_FILE
-	echo "Script name: " $SCRIPT_NAME
-	echo "Script extension: "$SCRIPT_EXTENSION
+	# This needs to be worked out
+	# echo "Package name: " "$(get_project_package_name)"
+	echo "Script file: " "$SCRIPT_FILE"
+	echo "Script name: " "$SCRIPT_NAME"
+	echo "Script extension: " "$SCRIPT_EXTENSION"
 }
 
 function debug_project_paths
@@ -25,27 +26,24 @@ function debug_project_paths
 
 SCRIPT_PATH="$0"
 if [[ "$SCRIPT_PATH" == "-bash" ]]; then
-	SCRIPT_PATH=`echo "${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}"`
+	SCRIPT_PATH="${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}"
 fi
 
-SCRIPT_ARGS="$@"
+SCRIPT_ARGS="$*"
 
 SCRIPT_FILE=$(basename "$SCRIPT_PATH")
 SCRIPT_EXTENSION="${SCRIPT_FILE##*.}"
 SCRIPT_NAME="${SCRIPT_FILE%.*}"
 
 GETENT=/usr/bin/getent
-DATE=/bin/date
 
 USER="$USER"
-if [[ ! -z ${USER+x} ]]; then
+if [[ -z "$USER" ]]; then
 	USER="$LOGNAME"
 fi
 
 HOME="$HOME"
-if [[ ! -z ${HOME+x} ]]; then
-	HOME=`$GETENT passwd -- "$USER" | awk -F ':' '{print $6}'`
+if [[ -z "$HOME" ]]; then
+	HOME=$($GETENT passwd -- "$USER" | awk -F ':' '{print $6}')
 fi
-
-
 

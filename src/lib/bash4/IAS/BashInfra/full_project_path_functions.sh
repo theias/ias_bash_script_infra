@@ -2,6 +2,7 @@
 
 FULL_PROJECT_INSTALLED_UP_PATHS='../../'
 
+# This needs to be worked out
 function get_project_package_name
 {
 	local some_bin_dir

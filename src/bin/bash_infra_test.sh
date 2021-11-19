@@ -22,6 +22,8 @@ write_log_debug "Here is a debug message."
 
 write_log_informational "Wrote: ${output_file_name}"
 
+debug_project_variables
+
 exit_status=0
 write_log_informational "Exit status: ${exit_status}"
 
