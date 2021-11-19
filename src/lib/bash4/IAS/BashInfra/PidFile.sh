@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Simple pidfile functionality
 
 # Returns a pidfile name based off of the name of the script.
@@ -9,11 +11,12 @@ function get_pidfile_name
 
 	pidfile_dir=${pidfile_dir:-/tmp}
 
-	local file_without_extension=$(basename "$0")
+	local file_without_extension
+	file_without_extension=$(basename "$0")
 	file_without_extension="${file_without_extension%.*}"
 	local pidfile_name="$pidfile_dir/${file_without_extension}.pid"
 
-	echo $pidfile_name
+	echo "$pidfile_name"
 }
 
 # Checks if a process is killable by sending a kill 0 to the
@@ -28,7 +31,7 @@ function is_process_killable
 	fi
 
 	# echo "Checking for alive process: $pid"	
-	if kill -0 $pid > /dev/null 2>&1
+	if kill -0 "$pid" > /dev/null 2>&1
 	then
 		return 0
 	fi
@@ -75,13 +78,14 @@ function init_pid_file
 	if [ -e "$pidfile" ]
 	then # If the pidfile exists
 		# Get the pid
-		local pid=$(get_pid_from_pidfile "$pidfile")
+		local pid
+		pid=$(get_pid_from_pidfile "$pidfile")
 		if is_process_killable "$pid"
 		then # If the process is alive
 			# echo "Minutes: $minutes"
-			if [[ ! -z "$minutes" ]]
+			if [[ -n "$minutes" ]]
 			then # And we've been told to check if it's over a certain time
-				if test $(find "$pidfile" -mmin +"$minutes")
+				if test "$(find "$pidfile" -mmin +"$minutes")"
 				then
 					# Write to stderr if it's over than that time
 					>&2 echo "Process $pid has a pidfile $pidfile older than $minutes minutes."
@@ -117,7 +121,8 @@ function cleanup_pidfile
 		return 1
 	fi
 
-	local pid=$(get_pid_from_pidfile "$pidfile")
+	local pid
+	pid=$(get_pid_from_pidfile "$pidfile")
 	if [[ "$pid" != "$$" ]]
 	then
 		>&2 echo "Cleaning up pidfile ($pidfile , $pid)  not belonging to my process ($$)..."
