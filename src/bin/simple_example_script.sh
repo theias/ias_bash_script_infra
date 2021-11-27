@@ -2,6 +2,7 @@
 
 all_arguments=( "$@" )
 
+# shellcheck disable=SC1091
 . /opt/IAS/lib/bash4/IAS/BashInfra/full_project_lib.sh || exit 1
 
 write_log_start "${all_arguments[@]}"
