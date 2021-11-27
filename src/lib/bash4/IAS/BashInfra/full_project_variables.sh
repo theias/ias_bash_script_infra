@@ -29,6 +29,7 @@ if [[ "$SCRIPT_PATH" == "-bash" ]]; then
 	SCRIPT_PATH="${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}"
 fi
 
+# shellcheck disable=SC2034
 SCRIPT_ARGS="$*"
 
 SCRIPT_FILE=$(basename "$SCRIPT_PATH")
