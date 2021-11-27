@@ -73,7 +73,7 @@ function write_logger_syslog_message
 		'--priority' "$log_priority" \
 #		"--id=$$" \
 	)
-	
+	# shellcheck disable=SC2153
 	if [[ "$LOG_TO_STDERR" == "1" || "$log_to_stderr" == "1" ]]
 	then
 		logger_options=('-s' "${logger_options[@]}");
