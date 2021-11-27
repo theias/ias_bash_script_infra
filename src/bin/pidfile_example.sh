@@ -22,6 +22,7 @@ libdir="$rp/../lib/bash4"
 bash_infra_lib_dir="IAS/BashInfra"
 PATH="${libdir}/$bash_infra_lib_dir:/opt/IAS/lib/bash4/$bash_infra_lib_dir:${PATH}"
 
+# shellcheck disable=SC1091
 . PidFile.sh
 
 to=${1:-10}
