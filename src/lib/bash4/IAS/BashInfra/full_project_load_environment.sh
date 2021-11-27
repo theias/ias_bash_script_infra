@@ -12,6 +12,7 @@ if [[ ! -f "$environment_conf_file" ]]; then
 		exit 1
 	fi
 else
+	# shellcheck disable=SC1090
 	. "${environment_conf_file}"
 fi
 
