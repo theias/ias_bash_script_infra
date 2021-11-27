@@ -7,19 +7,23 @@ function get_project_package_name
 {
 	local some_bin_dir
 	some_bin_dir=$(get_project_whence)
+	local PACKAGE_NAME
+	local PROJECT_DIRECTORY
+	local PROJECT_NAME
 
 	if project_is_bin_dir_in_src "$some_bin_dir" ; then
 
-		local PROJECT_DIRECTORY="$( cd "$(dirname "$BIN_DIR/../../../")" ; pwd -L )"
-		local PROJECT_NAME=$(basename "$PROJECT_DIRECTORY")
+		# shellcheck disable=SC2164
+		PROJECT_DIRECTORY="$( cd "$(dirname "$BIN_DIR/../../../")" ; pwd -L )"
+		PROJECT_NAME=$(basename "$PROJECT_DIRECTORY")
 		# echo "Project directory: $PROJECT_DIRECTORY"
 		# echo "PROJECT_NAME: $PROJECT_NAME"
-		local PACKAGE_NAME=`echo -- "$PROJECT_NAME" | sed 's/_/-/g'`
+		PACKAGE_NAME=$(echo -- "$PROJECT_NAME" | sed 's/_/-/g')
 		# echo "Package name: $PACKAGE_NAME"
 		echo -- "${PACKAGE_NAME}"
 		return
 	else
-		local PACKAGE_NAME=$(basename "${some_bin_dir}")
+		PACKAGE_NAME=$(basename "${some_bin_dir}")
 		echo "${PACKAGE_NAME}"
 		return
 	fi
