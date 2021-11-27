@@ -5,12 +5,15 @@ all_arguments=( "$@" )
 # How to log to files instead.
 # Will log to ../log/(somewhere); mkdir the directory
 # and logging to files will work.
+# shellcheck disable=SC2034
 LOG_TO_FILE='1'
 
+# shellcheck disable=SC1091
 . /opt/IAS/lib/bash4/IAS/BashInfra/full_project_lib.sh || exit 1
 
 # If you have subroutines you abstracted to a file called
 # bash_lib.sh, here's how you'd load them:
+# shellcheck disable=SC1090
 . "${BASH_FINDBIN_REALBIN}/bash_lib.sh" || exit 1
 
 #################################
