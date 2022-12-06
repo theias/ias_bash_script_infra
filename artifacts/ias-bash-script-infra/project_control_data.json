@@ -1,0 +1,93 @@
+{
+   "prompts" : [
+      {
+         "fail_regex" : "[^0-9a-zA-Z_]",
+         "description" : "Contains only letters, numbers and underscores.  Required.",
+         "prompt" : "Project Name: ",
+         "name" : "project_name"
+      },
+      {
+         "fail_regex" : "^\\s*$",
+         "prompt" : "Summary: ",
+         "description" : "Short description of project.  Required.",
+         "name" : "summary"
+      },
+      {
+         "name" : "wiki_page",
+         "description" : "External documentation.",
+         "prompt" : "Wiki page: "
+      },
+      {
+         "prompt" : "Ticket: ",
+         "description" : "Link to ticket, or ticket ID",
+         "name" : "ticket"
+      },
+      {
+         "name" : "AUTOMATION_USER",
+         "default_value" : "iasnetauto",
+         "description" : "Service user account.",
+         "prompt" : "Automation user name:",
+         "dont_prompt" : true
+      },
+      {
+         "dont_prompt" : true,
+         "description" : "Service group.",
+         "prompt" : "Automation user group:",
+         "name" : "AUTOMATION_GROUP",
+         "default_value" : "iasnetauto"
+      },
+      {
+         "description" : "Sets up permissions for the service user.",
+         "default_value" : 0,
+         "name" : "USE_AUTOMATION_PERMISSIONS",
+         "dont_prompt" : true
+      },
+      {
+         "dont_prompt" : true,
+         "description" : "Where project files get installed.  Required.",
+         "prompt" : "Base dir: ",
+         "name" : "BASE_DIR",
+         "default_value" : "/opt/IAS"
+      },
+      {
+         "dont_prompt" : true,
+         "default_value" : "project_directories-full_project.gmk",
+         "name" : "installed_directory_layout",
+         "description" : "File containing layout."
+      }
+   ],
+   "save-data" : {
+      "project_info" : "[% project_name %]/artifacts/[% package_name %]/project_info.json",
+      "project_control_data" : "[% project_name %]/artifacts/[% package_name %]/project_control_data.json"
+   },
+   "not-template-files-paths" : {
+      "regexes" : [
+         {
+            "regex" : "\\[% project.NON_TEMPLATE_NAME %\\]"
+         }
+      ],
+      "comment" : "For this project these are demonstrations / tests."
+   },
+   "post-create-run" : "cd [% project_name %]; make -f package_shell/make/project_layout_1-post_create.gmk project_layout_1-post_create",
+   "not-template-files-contents" : {
+      "comment" : "For this project these are demonstrations / tests.",
+      "regexes" : [
+         {
+            "comment" : "jpg files",
+            "regex" : "\\.jpg$"
+         },
+         {
+            "regex" : "\\.png$",
+            "comment" : "png files"
+         }
+      ]
+   },
+   "transforms" : [
+      {
+         "template_string" : "[% project_name %]",
+         "name" : "package_name",
+         "transform" : "underscores_to_dashes"
+      }
+   ],
+   "template_base_dir" : "/opt/IAS/templates/ias-package-shell/project_dir/"
+}

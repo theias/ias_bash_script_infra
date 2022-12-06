@@ -1,5 +1,7 @@
 # ias_bash_script_infra
 
+Bash infrastructure scripts and libraries
+
 Here is an introduction to this project.
 
 # License

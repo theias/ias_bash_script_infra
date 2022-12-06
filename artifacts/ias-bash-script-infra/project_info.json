@@ -1,0 +1,13 @@
+{
+   "ticket" : "",
+   "AUTOMATION_USER" : "iasnetauto",
+   "USE_AUTOMATION_PERMISSIONS" : 0,
+   "package_name" : "ias-bash-script-infra",
+   "summary" : "Bash infrastructure scripts and libraries",
+   "installed_directory_layout" : "project_directories-full_project.gmk",
+   "wiki_page" : "",
+   "project_name" : "ias_bash_script_infra",
+   "AUTOMATION_GROUP" : "iasnetauto",
+   "project_dir" : "ias_bash_script_infra",
+   "BASE_DIR" : "/opt/IAS"
+}
