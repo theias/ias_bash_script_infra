@@ -1,1 +1,0 @@
-../../generic_rpm/build-dist.sh

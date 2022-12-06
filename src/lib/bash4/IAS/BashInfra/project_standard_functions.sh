@@ -43,7 +43,7 @@ function write_error
 
 function write_log_start
 {
-	write_log_informational "$SCRIPT_PATH" "$*" "$USER" "$$" "--BEGINNING--"
+	write_log_informational $( realpath "$SCRIPT_PATH" ) "$*" "$USER" "$$" "--BEGINNING--"
 }
 
 function write_log_end

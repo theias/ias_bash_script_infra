@@ -1,3 +1,10 @@
+ias-bash-script-infra 2.0.0-0 noarch; urgency=low
+
+	* Changed position of parameters for internal syslogging functionality
+	  which allows for piping to logger ; i.e. >(write_log_informational)
+
+ -- Martin VanWinkle mvanwinkle@ias.edu  Tue, 06 Dec 2022 11:41:44 -0500
+
 ias-bash-script-infra 1.3.0-0 noarch; urgency=low
 
 	* "Fixed" figuring out if something is inside a directory named 'src'
