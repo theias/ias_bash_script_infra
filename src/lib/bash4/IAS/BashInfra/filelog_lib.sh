@@ -31,11 +31,12 @@ function write_logfile_message
 
 	if [[ -z "$msg" ]]
 	then
+		local escaped_prepend==$(printf '%s\n' "$log_message_prepend" | sed -e 's/[\/&]/\\&/g')
 		if [[ "$LOG_TO_STDERR" == "1" || "$log_to_stderr" == "1" ]]
 		then
-			cat | sed "s/^/$log_message_prepend /" | tee >(cat 1>&2)  >> "$LOG_FILE_PATH" 
+			cat | sed "s/^/$escaped_prepend /" | tee >(cat 1>&2)  >> "$LOG_FILE_PATH" 
 		else
-			cat | sed "s/^/$log_message_prepend /" >> "$LOG_FILE_PATH"
+			cat | sed "s/^/$escaped_prepend /" >> "$LOG_FILE_PATH"
 		fi
 	else	
 		if [[ "$LOG_TO_STDERR" == "1" || "$log_to_stderr" == "1" ]]
