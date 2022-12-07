@@ -31,7 +31,10 @@ function write_logfile_message
 
 	if [[ -z "$msg" ]]
 	then
-		local escaped_prepend==$(printf '%s\n' "$log_message_prepend" | sed -e 's/[\/&]/\\&/g')
+		# This appears to be OK for the log message prepend escaping to be sent to sed
+		local escaped_prepend=$(printf '%s\n' "$log_message_prepend" | sed 's/[\/&]/\\&/g')
+#		# local escaped_prepend=$( sed 's/[^^]/[&]/g; s/\^/\\^/g' <<< $log_message_prepend )
+
 		if [[ "$LOG_TO_STDERR" == "1" || "$log_to_stderr" == "1" ]]
 		then
 			cat | sed "s/^/$escaped_prepend /" | tee >(cat 1>&2)  >> "$LOG_FILE_PATH" 
