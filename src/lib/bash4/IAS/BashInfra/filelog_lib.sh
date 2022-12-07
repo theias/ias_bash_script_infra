@@ -27,7 +27,7 @@ function write_logfile_message
 	local log_to_stderr="$1" ; shift
 	local msg="$1"
 	
-	log_message_prepend="$(date) $(hostname) $0 [$$] $log_priority"
+	local log_message_prepend="$(date) $(hostname) $0 [$$] $log_priority"
 
 	if [[ -z "$msg" ]]
 	then
@@ -42,7 +42,7 @@ function write_logfile_message
 		then
 			>&2 echo "$msg"
 		fi
-		echo -- "$(date)" "$(hostname)" "$0""[$$]" "$log_priority" "$msg" >> "$LOG_FILE_PATH"
+		echo "$log_message_prepend" "$msg" >> "$LOG_FILE_PATH"
 	fi
 }
 
