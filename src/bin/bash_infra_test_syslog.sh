@@ -1,5 +1,7 @@
 #!/bin/bash
 
+LOG_TO_FILE=${LOG_TO_FILE:-0}
+
 # shellcheck disable=SC2164
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -L )"
 IAS_BASH_INFRA_LIB_DIR="${SCRIPT_PATH}/../lib/bash4/IAS/BashInfra/"

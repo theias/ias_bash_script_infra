@@ -23,23 +23,27 @@ function check_logging_setup
 
 function write_logfile_message
 {
-	local log_priority
-	local msg
-
-	log_priority="$1"
-	msg="$2"
+	local log_priority="$1" ; shift
+	local log_to_stderr="$1" ; shift
+	local msg="$1"
 	
+	log_message_prepend="$(date) $(hostname) $0 [$$] $log_priority"
+
 	if [[ -z "$msg" ]]
 	then
-		msg="Empty log message"
+		if [[ "$LOG_TO_STDERR" == "1" || "$log_to_stderr" == "1" ]]
+		then
+			cat | sed "s/^/$log_message_prepend /" | tee >(cat 1>&2)  >> "$LOG_FILE_PATH" 
+		else
+			cat | sed "s/^/$log_message_prepend /" >> "$LOG_FILE_PATH"
+		fi
+	else	
+		if [[ "$LOG_TO_STDERR" == "1" || "$log_to_stderr" == "1" ]]
+		then
+			>&2 echo "$msg"
+		fi
+		echo -- "$(date)" "$(hostname)" "$0""[$$]" "$log_priority" "$msg" >> "$LOG_FILE_PATH"
 	fi
-	
-	if [[ "$LOG_TO_STDERR" == "1" ]]
-	then
-		>&2 echo "$msg"
-	fi
-	echo -- "$(date)" "$(hostname)" "$0""[$$]" "$log_priority" "$msg" >> "$LOG_FILE_PATH"
-	
 }
 
 function write_log_alert
@@ -54,7 +58,10 @@ function write_logfile_alert
 	local msg
 	msg="$*"
 
-	write_logfile_message "alert" "$msg"
+	write_logfile_message \
+		"alert" \
+		"$LOG_TO_STDERR_write_log_alert" \
+		"$msg"
 }
 
 function write_log_critical
@@ -69,7 +76,10 @@ function write_logfile_critical
 	local msg
 	msg="$*"
 
-	write_logfile_message "crit" "$msg"
+	write_logfile_message \
+		"crit" \
+		"$LOG_TO_STDERR_write_log_critical" \
+		"$msg"
 }
 
 function write_log_debug
@@ -86,7 +96,10 @@ function write_logfile_debug
 
 	if [[ "$LOG_DEBUG" == "1" ]]
 	then
-		write_logfile_message "debug" "$msg"
+		write_logfile_message \
+			"debug" \
+			"$LOG_TO_STDERR_write_log_debug" \
+			"$msg"
 	fi
 	
 }
@@ -103,7 +116,10 @@ function write_logfile_emergency
 	local msg
 	msg="$*"
 
-	write_logfile_message "emerg" "$msg"
+	write_logfile_message \
+		"emerg" \
+		"$LOG_TO_STDERR_write_log_emergency" \
+		"$msg"
 }
 
 function write_log_error
@@ -118,7 +134,10 @@ function write_logfile_error
 	local msg
 	msg="$*"
 
-	write_logfile_message "error" "$msg"
+	write_logfile_message \
+		"error" \
+		"$LOG_TO_STDERR_write_log_error" \
+		"$msg"
 }
 
 function write_log_informational
@@ -133,7 +152,10 @@ function write_logfile_informational
 	local msg
 	msg="$*"
 
-	write_logfile_message "info" "$msg"
+	write_logfile_message \
+		"info" \
+		"$LOG_TO_STDERR_write_log_informational" \
+		"$msg"
 }
 
 function write_log_notice
@@ -148,7 +170,10 @@ function write_logfile_notice
 	local msg
 	msg="$*"
 
-	write_logfile_message "notice" "$msg"
+	write_logfile_message \
+		"notice" \
+		"$LOG_TO_STDERR_write_log_notice" \
+		"$msg"
 }
 
 function write_log_warning
@@ -163,5 +188,8 @@ function write_logfile_warning
 	local msg
 	msg="$*"
 
-	write_logfile_message "warning" "$msg"
+	write_logfile_message \
+		"warning" \
+		"$LOG_TO_STDERR_write_log_warning" \
+		"$msg"
 }
