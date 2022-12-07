@@ -27,7 +27,7 @@ function write_logfile_message
 	local log_to_stderr="$1" ; shift
 	local msg="$1"
 	
-	local log_message_prepend="$(date) $(hostname) $0 [$$] $log_priority"
+	local log_message_prepend="$(date) $(hostname) $0 [$$] $log_priority:"
 
 	if [[ -z "$msg" ]]
 	then
