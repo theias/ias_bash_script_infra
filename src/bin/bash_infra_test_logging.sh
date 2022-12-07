@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# This is intended to test both syslog and logging to file functionality.
+# 
+# To watch were logs are emitted:
+# sudo tail -f bash_infra_test_logging.log /var/log/syslog
+
+# (example) Test commands:
+# ./bash_infra_test_logging.sh
+# LOG_TO_STDERR=1 ./bash_infra_test_logging.sh
+# LOG_TO_FILE=1 ./bash_infra_test_logging.sh
+# LOG_TO_STDERR=1 LOG_TO_FILE=1 ./bash_infra_test_logging.sh
+
 LOG_TO_FILE=${LOG_TO_FILE:-0}
 
 # shellcheck disable=SC2164
