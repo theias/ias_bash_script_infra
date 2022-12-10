@@ -53,12 +53,6 @@
 #\ might be ```/opt/IAS/bin/project-name/../../etc/project-name```
 #\ i.e. ```/opt/IAS/etc/project-name```
 #\ 
-#\ ## Infrastructure Libraries
-#\
-#\ In the haste of things, programmers bother not to deal with the encumbrance
-#\ of writing libraries to take care of these issues.
-#\
-#\ That's OK.
 
 #\ # The Code
 #\
