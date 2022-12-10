@@ -1,8 +1,10 @@
 #!/bin/bash
 
+#\BEGIN:redacted
 #\ This files documentation uses "embedded markdown".
 #\ Lines starting with #\ can be removed (or extracted) with:
-#\ grep -vE '^#\\'
+#\ ```grep -vE '^#\\' | sed '/^$/N;/^\n$/D' ```
+#\END:redacted
 
 #\ # Introduction 
 #\
@@ -10,12 +12,13 @@
 #\ * The program it's wrapping will be called "The Unaware".
 #\
 #\ Some (vast majority) of programs have been made which are unaware of:
-#\ 	* behavioral:
-#\ 		* the need to log to syslog or to log files and report errors
-#\ 		* the ability to simply create sane output file names
-#\ 	* filesystem layout:
-#\		* repository organization
-#\ 		* organization of files when installed
+#\
+#\ * behavioral:
+#\ 	* the need to log to syslog or to log files and report errors
+#\ 	* the ability to simply create sane output file names
+#\ * filesystem layout:
+#\ 	* repository organization
+#\ 	* organization of files when installed
 #\
 #\ While this is OK, it can lead to problems when (for example) cronning things.
 #\
@@ -33,10 +36,11 @@
 #\ ### Simple and Sane Output File Names
 #\
 #\ Countless times (way too many, IMO) programmers write various ways of:
-#\ 	* naming output files with (say): timestamp>-label-description.<extension>
-#\ 	* deciding where output files should go
-#\ 	* making the appropriate accomodations for the repository (i.e. .gitignore)
-#\	 to keep the repository clean.
+#\
+#\ * naming output files with (say): timestamp-label-description.<extension>
+#\ * deciding where output files should go
+#\ * making the appropriate accomodations for the repository (i.e. .gitignore)
+#\ to keep the repository clean.
 #\
 #\ ## Filesystem Layout
 #\
@@ -141,9 +145,9 @@ write_log_informational "Full command: ${command_to_run[@]}"
 
 #\ ## Finally Running The Unaware
 
-#\	* redirect the output of the command to our handy-dandy auto-generated
-#\ 	output file name
-#\ 	* use stdbuff to set the pipeline for logging stderr to be line buffered.
+#\ * redirect the output of the command to our handy-dandy auto-generated
+#\ output file name
+#\ * use stdbuff to set the pipeline for logging stderr to be line buffered.
 
 "${command_to_run[@]}" \
 	> "$output_file_name" \
@@ -174,3 +178,4 @@ write_log_end
 
 exit $exit_status_of_unaware_script
 
+#\ # Full Code Listing: 
