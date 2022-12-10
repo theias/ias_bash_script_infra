@@ -45,7 +45,7 @@
 #\ ## Filesystem Layout
 #\
 #\ When a program is run from a project directory (such as a git repo)
-#\ the configuration files (for example) might be in src/bin/../etc , but
+#\ the configuration files (for example) might be in ```src/bin/../etc``` , but
 #\ the location of configuration files when installed via a package
 #\ might be ```/opt/IAS/bin/project-name/../../etc/project-name```
 #\ i.e. ```/opt/IAS/etc/project-name```
