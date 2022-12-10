@@ -19,7 +19,7 @@ While this is OK, it can lead to problems when (for example) cronning things.
 ### Logging and Error Reporting
 
 The Unaware program it's wrapping uses stderr to print status messages and error
-messages (yuck).  Those get sent to syslog (currently).
+messages (yuck).  The Wrapper sends those to syslog (currently).
 
 Due to stderr being used for both status and for error messages, This Wrapper
 relies on the exit value of the The Unaware being to be non-zero if
