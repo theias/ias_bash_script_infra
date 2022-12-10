@@ -84,9 +84,9 @@ write_log_start "${all_arguments[@]}"
 #\
 #\ This is where you'd process arguments that The Wrapper
 #\ would use to do its thing.
-#\ ```my_arg1=$1; shift ```
 
 # (wrapper argument processing goes here)
+# my_arg1=$1; shift 
 
 #\ The rest of the arguments are what we're going to pass to
 #\ the program that's getting wrapped
