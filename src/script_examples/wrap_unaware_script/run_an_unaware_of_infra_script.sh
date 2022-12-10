@@ -8,6 +8,9 @@
 
 #\ # Introduction 
 #\
+#\ A full code listing is at the end of this document.  If you're inclined to,
+#\ you can read that first.
+#\
 #\ * This script will be referred to as "This Wrapper".
 #\ * The program it's wrapping will be called "The Unaware".
 #\
