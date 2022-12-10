@@ -189,7 +189,10 @@ write_log_end
 
 exit $exit_status_of_unaware_script
 ```
-# Full Code Listing: 
+# Full Code Listing
+
+In my opinion, this code is self-documenting.
+The "why" is documented above.
 
 ```bash
 #!/bin/bash
