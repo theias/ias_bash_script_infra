@@ -109,9 +109,8 @@ It also has the ability to refer to the symbolic link's location to determine
 locations when configured to do so.
 ## The Wrapping Code
 
-```get_output_filename``` returns something like this:
-* ```output/script-name/date-script-name-extension```
-by default.
+```get_output_filename``` returns something like this 
+```output/script-name/date-script-name-extension``` by default.
 
 ```bash
 output_file_name=$(get_output_file_name)

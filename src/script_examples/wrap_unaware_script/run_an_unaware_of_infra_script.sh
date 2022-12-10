@@ -110,9 +110,8 @@ program_to_run="$(get_bin_dir)/unaware_of_infra_script.sh"
 
 #\ ## The Wrapping Code
 #\
-#\ ```get_output_filename``` returns something like this:
-#\ * ```output/script-name/date-script-name-extension```
-#\ by default.
+#\ ```get_output_filename``` returns something like this 
+#\ ```output/script-name/date-script-name-extension``` by default.
 
 output_file_name=$(get_output_file_name)
 
