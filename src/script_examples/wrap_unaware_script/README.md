@@ -39,8 +39,8 @@ to keep the repository clean.
 When a program is run from a project directory (such as a git repo)
 the configuration files (for example) might be in src/bin/../etc , but
 the location of configuration files when installed via a package
-might be /opt/IAS/bin/project-name/../../etc/project-name
-i.e. /opt/IAS/etc/project-name
+might be ```/opt/IAS/bin/project-name/../../etc/project-name```
+i.e. ```/opt/IAS/etc/project-name```
 
 ## Infrastructure Libraries
 
@@ -109,7 +109,8 @@ It also has the ability to refer to the symbolic link's location to determine
 locations when configured to do so.
 ## The Wrapping Code
 
-get_output_filename returns output/script-name/date-script-name-extension
+```get_output_filename``` returns something like this:
+* ```output/script-name/date-script-name-extension```
 by default.
 
 ```bash

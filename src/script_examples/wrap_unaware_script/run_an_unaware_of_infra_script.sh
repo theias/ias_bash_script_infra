@@ -47,8 +47,8 @@
 #\ When a program is run from a project directory (such as a git repo)
 #\ the configuration files (for example) might be in src/bin/../etc , but
 #\ the location of configuration files when installed via a package
-#\ might be /opt/IAS/bin/project-name/../../etc/project-name
-#\ i.e. /opt/IAS/etc/project-name
+#\ might be ```/opt/IAS/bin/project-name/../../etc/project-name```
+#\ i.e. ```/opt/IAS/etc/project-name```
 #\ 
 #\ ## Infrastructure Libraries
 #\
@@ -110,7 +110,8 @@ program_to_run="$(get_bin_dir)/unaware_of_infra_script.sh"
 
 #\ ## The Wrapping Code
 #\
-#\ get_output_filename returns output/script-name/date-script-name-extension
+#\ ```get_output_filename``` returns something like this:
+#\ * ```output/script-name/date-script-name-extension```
 #\ by default.
 
 output_file_name=$(get_output_file_name)
