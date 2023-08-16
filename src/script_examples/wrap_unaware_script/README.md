@@ -129,8 +129,8 @@ write_log_informational "Running: $program_to_run"
 We set up the entire command in an array.  This is convienent for a
 number of reasons:
 
-	* If we desire to do some trickery, we can manipulate the array
-	* The entire array can be sent to the log
+* If we desire to do some trickery, we can manipulate the array
+* The entire array can be sent to the log
 
 Bug / TODO:  The stdbuf command at the start doesn't cause the output
 of The Unware to be line-buffered (as I was expecting when I read
