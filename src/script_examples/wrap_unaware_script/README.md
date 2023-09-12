@@ -26,7 +26,7 @@ messages (yuck).  The Wrapper sends those to syslog (currently).
 
 Due to stderr being used for both status and for error messages, This Wrapper
 relies on the exit value of the The Unaware being to be non-zero if
-a some error that requires attention has occured.
+some error that requires attention has occured.
 
 ### Simple and Sane Output File Names
 
