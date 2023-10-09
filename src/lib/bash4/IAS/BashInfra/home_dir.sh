@@ -18,7 +18,7 @@ function get_IAS_infra_home_dir_path_owner
 	local path="$1"
 	if [[ -z "$path" ]]
 	then
-		>&2 sprintf '%s\n'  \
+		>&2 printf '%s\n'  \
 			"${BASH_SOURCE[0]} : get_IAS_infra_home_dir_path_owner : first parameter is path"
 		return 1
 	fi
@@ -32,7 +32,7 @@ function get_IAS_infra_home_dir_for_user
 	local user="$1"
 	if [[ -z "$user" ]]
 	then
-		>&2 sprintf '%s\n'
+		>&2 printf '%s\n' \
 			"${BASH_SOURCE[0]} : get_IAS_infra_home_dir_for_user : first parameter is user"
 		return 1
 	fi
@@ -44,6 +44,8 @@ function get_IAS_infra_home_dir
 {
 
 	current_user="$LOGNAME"
+	# >&2 printf "Current user: %s\n" "$current_user"
+
 	local wanted_user
 
 	if [[ -z "$IAS_INFRA_HOME_DIR_TYPE" ]]
@@ -61,18 +63,24 @@ function get_IAS_infra_home_dir
 		get_IAS_infra_home_dir_for_user "$IAS_INFRA_HOME_DIR_USER"
 		return $?
 	
-	elif [[ "$IAS_INFRA_HOME_DIR_TYPE" = "owner" ]]
+	elif [[ "$IAS_INFRA_HOME_DIR_TYPE" == "owner" ]]
 	then
 		wanted_user=$( get_IAS_infra_home_dir_path_owner "$0" )
 		get_IAS_infra_home_dir_for_user "$wanted_user"
 
-	elif [[ "$IAS_INFRA_HOME_DIR_TYPE" = "path_owner" ]]
+	elif [[ "$IAS_INFRA_HOME_DIR_TYPE" == "path_owner" ]]
 	then
+		if [[ -z "$IAS_INFRA_HOME_DIR_PATH" ]]
+		then
+			>&2 printf "%s\n" "path_owner requires path $IAS_INFRA_HOME_DIR_PATH"
+			return 1
+		fi
+
 		wanted_user=$( get_IAS_infra_home_dir_path_owner "$IAS_INFRA_HOME_DIR_PATH" )
 		get_IAS_infra_home_dir_for_user "$wanted_user"
 		return $?
 	else
-		>&2 sprintf '%s\n' \
+		>&2 printf '%s\n' \
 			"get_IAS_infra_home_dir: Unable to figure out what you wanted."
 	fi
 }

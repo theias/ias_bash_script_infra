@@ -24,8 +24,17 @@ my_lib_dir=${my_lib_dir:-"$this_dir/../lib"}
 # . "$test_simple_bash" tests 1
 # ok [[ "$test_bin_dir/a_test" ]] 'a test should run.'
 
-. "$test_simple_bash" tests 3
+. "$test_simple_bash" tests 5
+
+# Do the examples run?
 ok "$test_bin_dir/run_simple_example_script.sh" 'simple example should run'
 ok "$test_bin_dir/run_complex_example_script.sh" 'complex example should run'
 
+# Does the pidfile stuff run?
 ok  "$test_bin_dir/test_pidfile1.sh"  'pid file stuff should work'
+
+ok "$test_bin_dir/test_home_dir1.sh" \
+	'Simple home directory stuff should work'
+
+ok "$test_bin_dir/test_home_root_path_owner.sh"
+	'Home directory of user who owns path should work'
