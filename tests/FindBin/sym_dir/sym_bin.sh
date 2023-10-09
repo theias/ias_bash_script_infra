@@ -1,1 +1,0 @@
-../real_dir/real_bin.sh

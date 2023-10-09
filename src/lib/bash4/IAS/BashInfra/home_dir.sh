@@ -18,7 +18,8 @@ function get_IAS_infra_home_dir_path_owner
 	local path="$1"
 	if [[ -z "$path" ]]
 	then
-		>&2 echo "${BASH_SOURCE[0]} : get_IAS_infra_home_dir_path_owner : first parameter is path"
+		>&2 sprintf '%s\n'  \
+			"${BASH_SOURCE[0]} : get_IAS_infra_home_dir_path_owner : first parameter is path"
 		return 1
 	fi
 
@@ -31,11 +32,12 @@ function get_IAS_infra_home_dir_for_user
 	local user="$1"
 	if [[ -z "$user" ]]
 	then
-		>&2 echo "${BASH_SOURCE[0]} : get_IAS_infra_home_dir_for_user : first parameter is user"
+		>&2 sprintf '%s\n'
+			"${BASH_SOURCE[0]} : get_IAS_infra_home_dir_for_user : first parameter is user"
 		return 1
 	fi
 	
-	eval echo "~$user"
+	eval printf '%s' "~$user"
 }
 
 function get_IAS_infra_home_dir
@@ -70,6 +72,7 @@ function get_IAS_infra_home_dir
 		get_IAS_infra_home_dir_for_user "$wanted_user"
 		return $?
 	else
-		>&2 echo "get_IAS_infra_home_dir: Unable to figure out what you wanted."
+		>&2 sprintf '%s\n' \
+			"get_IAS_infra_home_dir: Unable to figure out what you wanted."
 	fi
 }

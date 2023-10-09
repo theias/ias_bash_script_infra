@@ -22,3 +22,4 @@ write_log_error "This is an example error."
 
 write_log_end
 
+exit "$exit_status"
